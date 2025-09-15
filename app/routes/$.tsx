@@ -1,7 +1,7 @@
-import { useLocation } from "react-router-dom";
+import { useLocation } from "@remix-run/react";
 import { useEffect } from "react";
 
-const NotFound = () => {
+export default function CatchAll() {
   const location = useLocation();
 
   useEffect(() => {
@@ -19,6 +19,4 @@ const NotFound = () => {
       </div>
     </div>
   );
-};
-
-export default NotFound;
+}
