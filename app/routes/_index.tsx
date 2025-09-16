@@ -1,4 +1,6 @@
-import type { MetaFunction } from "@remix-run/node";
+import type { MetaFunction, LoaderFunction } from "@remix-run/node";
+import { useLoaderData } from "@remix-run/react";
+import { notificationService } from "notification/notificationService";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardStats } from "@/components/dashboard/DashboardStats";
@@ -14,7 +16,19 @@ export const meta: MetaFunction = () => {
   ];
 };
 
+export const loader: LoaderFunction = async () => {
+  // Use the notification service to process data
+  const processedData = notificationService.processData("Dashboard User");
+  console.log("Loader function called",  processedData);
+  
+  return {
+    message: processedData.message,
+    notifications: 5,
+  };
+};
+
 export default function Index() {
+  const data = useLoaderData<typeof loader>();
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-background">
@@ -27,7 +41,7 @@ export default function Index() {
             <div>
               <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
               <p className="text-muted-foreground">
-                Welcome back! Here's what's happening with your projects today.
+                {data.message} You have {data.notifications} new notifications.
               </p>
             </div>
             

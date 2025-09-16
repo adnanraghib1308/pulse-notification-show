@@ -1,0 +1,26 @@
+{
+  "name": "@repo/notification",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./notificationService": "./src/service/notificationService.ts"
+  },
+  "scripts": {
+    "lint": "eslint . --max-warnings 0",
+    "lint:fix": "eslint . --fix",
+    "typecheck": "tsc --noEmit",
+    "test:unit": "STAGE=test NODE_OPTIONS=\"--import tsx\" vitest run",
+    "test:unit:coverage": "npm run test:unit -- --coverage",
+    "test:component": "NODE_OPTIONS=\"--import tsx\" STAGE=component-test TEST_TYPE=component DOTENV_CONFIG_PATH=../../.env.config.component vitest run component.test.ts",
+    "test:component:coverage": "npm run test:component -- --coverage",
+    "test:coverage:merge": "npx tsx -e \"require('@repo/shared/test-coverage').runMergeCoverage()\" -- unit component",
+    "test:all:coverage": "npm run test:unit:coverage && npm run test:component:coverage && npm run test:coverage:merge"
+  },
+  "devDependencies": {
+    "vitest": "^3.0.5",
+    "msw": "^2.7.5"
+  },
+  "dependencies": {
+  }
+}
