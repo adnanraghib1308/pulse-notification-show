@@ -1,7 +1,6 @@
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { useLoaderData, useSearchParams } from "@remix-run/react";
 import { useEffect, useState } from "react";
-import { notificationService } from "notification/notificationService";
 import { DashboardHeader } from "@/components/dashboard/DashboardHeader";
 import { DashboardSidebar } from "@/components/dashboard/DashboardSidebar";
 import { DashboardStats } from "@/components/dashboard/DashboardStats";
@@ -12,12 +11,12 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "Dashboard - Pulse Notification" },
-    { name: "description", content: "Modern dashboard with notification system" },
+    { title: "User Dashboard - Pulse Notification" },
+    { name: "description", content: "User-specific dashboard with notification system" },
   ];
 };
 
-export default function Index() {
+export default function UserDashboard() {
   return (
     <TooltipProvider>
       <div className="min-h-screen bg-background">
@@ -28,10 +27,7 @@ export default function Index() {
           
           <main className="flex-1 p-6 space-y-6">
             <div>
-              <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-              <p className="text-muted-foreground">
-                Welcome to your dashboard.
-              </p>
+              <h1 className="text-3xl font-bold mb-2">User Dashboard</h1>
             </div>
             
             <DashboardStats />
@@ -43,17 +39,28 @@ export default function Index() {
               
               <div className="space-y-6">
                 <div className="bg-gradient-card rounded-lg p-6 shadow-soft">
-                  <h3 className="font-semibold mb-4">Quick Actions</h3>
+                  <h3 className="font-semibold mb-4">User Actions</h3>
                   <div className="space-y-2">
                     <button className="w-full text-left p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                      Create New Project
+                      View User Profile
                     </button>
                     <button className="w-full text-left p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                      Invite Team Member
+                      Send Notification
                     </button>
                     <button className="w-full text-left p-3 rounded-lg bg-muted/50 hover:bg-muted transition-colors">
-                      Generate Report
+                      Generate User Report
                     </button>
+                  </div>
+                </div>
+
+                {/* User-specific information */}
+                <div className="bg-gradient-card rounded-lg p-6 shadow-soft">
+                  <h3 className="font-semibold mb-4">User Info</h3>
+                  <div className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-muted-foreground">Status:</span>
+                      <span className="text-green-600">Active</span>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -4,7 +4,9 @@
   "private": true,
   "type": "module",
   "exports": {
-    "./notificationService": "./src/service/notificationService.ts"
+    "./notificationService": "./src/service/notificationService.ts",
+    "./types/notification": "./src/types/notification.ts",
+    "./factory/notificationFactory": "./src/service/notificationFactory.ts"
   },
   "scripts": {
     "lint": "eslint . --max-warnings 0",
